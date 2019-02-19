@@ -16,3 +16,4 @@
 2. Run `yarn` to install dependencies.
 3. Run `yarn start` to start the local development environment.
 4. Open `http://localhost:9000` in a browser.
+5. When done implementing the functionality, commit to your own fork, and open a PR or send a link to the repo.
