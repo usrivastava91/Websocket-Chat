@@ -1,0 +1,22 @@
+{
+  "name": "interview",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/akatechis/pefin-interview.git",
+  "author": "Alexandros Katechis <alex.katechis@pefin.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "express": "^4.16.4",
+    "parcel-bundler": "^1.11.0",
+    "socket.io": "^2.2.0"
+  },
+  "dependencies": {
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "redux": "^4.0.1"
+  }
+}
