@@ -10,3 +10,9 @@
 2. Create a middleware to receive actions, and emit their messages to the socket.
 3. The middleware should also listen to the socket for messages, and dispatch the correct actions.
 4. Update the <App /> component to render messages from the datastore.
+
+## Getting Started
+1. Fork this repo, and clone it locally.
+2. Run `yarn` to install dependencies.
+3. Run `yarn start` to start the local development environment.
+4. Open `http://localhost:9000` in a browser.
