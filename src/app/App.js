@@ -1,5 +1,12 @@
 import React from 'react'
+import { connect } from "react-redux";
+import { sendMessage } from './actions';
 
+const mapStateToProps = state => {
+  return { messages: state.messages };
+}
+
+var updatedMessages = [];
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -8,26 +15,46 @@ class App extends React.Component {
     }
     this.updateDraft = this.updateDraft.bind(this)
     this.send = this.send.bind(this)
+
   }
 
-  updateDraft (event) {
+
+  updateDraft(event) {
     this.setState({ draft: event.target.value })
   }
 
-  send (event) {
+  send(event) {
     event.preventDefault()
-    console.log(this.state.draft)
-    this.props.socket.emit('message', this.state.draft)
+    this.props.sendMessage(this.state.draft)
+    this.state.draft = '';
+
+    // console.log('outside',this.props.messges)
+    // setTimeout(console.log('ye late hai', this.props.messages))
+    // this.props.socket.emit('message', this.props.messages);
   }
 
-  render () {
+  componentWillReceiveProps(nextProps) {
+    // console.log('------ON STATE CHANGE---------',this.props.messages)
+    this.props.socket.emit('message', nextProps.messages[nextProps.messages.length - 1]);
+    updatedMessages.push(nextProps.messages[nextProps.messages.length - 1]);
+    // console.log('------ON STATE CHANGE---------', updatedMessages)
+
+
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('componentDidUpdate')
+
+  }
+  render() {
     return (
       <div>
         <ul className='messages'>
-          <li>message 1</li>
-          <li>message 2</li>
-          <li>message 3</li>
-          <li>message 4</li>
+          {updatedMessages.map(message => (
+            <li>
+              {message}
+            </li>
+          ))}
         </ul>
         <form>
           <input className='m' autoComplete='off' value={this.state.draft} onChange={this.updateDraft} />
@@ -38,4 +65,5 @@ class App extends React.Component {
   }
 }
 
-export default App
+const ConnectedApp = connect(mapStateToProps, { sendMessage })(App);
+export default ConnectedApp;

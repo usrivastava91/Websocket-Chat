@@ -17,6 +17,8 @@
   "dependencies": {
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "react-redux": "^7.0.2",
+    "redux-thunk": "^2.3.0"
   }
 }
