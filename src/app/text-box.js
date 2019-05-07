@@ -21,7 +21,7 @@ class Textbox extends React.Component {
       send(event) {
         event.preventDefault();
         this.props.sendMessage(this.state.draft);
-        this.props.socket('message', this.state.draft);
+        this.props.socket.emit('message', this.state.draft);
         this.state.draft = '';
       }
 

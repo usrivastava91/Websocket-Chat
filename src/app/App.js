@@ -3,44 +3,21 @@ import { connect } from 'react-redux';
 import ChatScreen from './chat-screen';
 import ConnectedTextbox from './text-box';
 import { sendMessage } from './actions';
-
+import io from 'socket.io-client';
 const mapStateToProps = state => {
   return { messages: state.messages };
 }
+ var socket;
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      draft: ''
-    }
-    this.updateDraft = this.updateDraft.bind(this)
-    this.send = this.send.bind(this)
-
+    socket = io('localhost:9001');
   }
-
-  updateDraft(event) {
-    this.setState({ draft: event.target.value })
-  }
-
-
-  send(event) {
-    event.preventDefault()
-    this.props.sendMessage(this.state.draft)
-    this.state.draft = '';
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.props.socket.emit('message', nextProps.messages[nextProps.messages.length - 1]);
-  }
-
   render() {
     return (
       <div>
         <ChatScreen />
-        <form>
-          <input className='m' autoComplete='off' value={this.state.draft} onChange={this.updateDraft} />
-          <button onClick={this.send}>Send</button>
-        </form>
+        <ConnectedTextbox socket={socket}/>
       </div>
     )
   }
