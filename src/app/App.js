@@ -12,6 +12,9 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     socket = io('localhost:9001');
+    socket.on('message',(msg) => {
+      this.props.sendMessage(msg);
+    })
   }
   render() {
     return (
